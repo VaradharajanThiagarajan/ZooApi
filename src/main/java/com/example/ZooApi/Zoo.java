@@ -1,6 +1,7 @@
 package com.example.ZooApi;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +19,11 @@ public class Zoo {
     public void addAnimal(Animal a1)
     {
         animalsList.add(a1);
+    }
+
+    @GetMapping("/listAnimals")
+    public ArrayList<Animal> getAnimals()
+    {
+        return animalsList;
     }
 }

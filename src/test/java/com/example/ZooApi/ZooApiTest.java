@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -29,6 +31,31 @@ public class ZooApiTest {
                 .content(objectMapper.writeValueAsString(a1))
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());
+
+    }
+
+    @Test
+    public void getAnimalsTest() throws Exception {
+
+        //setup
+        Animal a1 = new Animal("Dog","walking");
+        Animal a2 = new Animal("Bird","flying");
+        Zoo z1 = new Zoo();
+        //z1.addAnimal(a1);
+        mockMvc.perform(post("/animal")
+                .content(objectMapper.writeValueAsString(a1))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+        mockMvc.perform(post("/animal")
+                .content(objectMapper.writeValueAsString(a2))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+        mockMvc.perform(get("/listAnimals"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2));
+
+
+
 
     }
 }
