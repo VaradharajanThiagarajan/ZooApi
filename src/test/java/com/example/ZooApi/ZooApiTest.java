@@ -1,5 +1,6 @@
 package com.example.ZooApi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ public class ZooApiTest {
     ObjectMapper objectMapper;
 
     @Test
-    public void addAnimalTest()
-    {
+    public void addAnimalTest() throws Exception {
         Animal a1 = new Animal("Dog","walking");
         Zoo z1 = new Zoo();
         //z1.addAnimal(a1);
