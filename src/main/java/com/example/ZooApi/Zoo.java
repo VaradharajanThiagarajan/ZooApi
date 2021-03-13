@@ -21,7 +21,7 @@ public class Zoo {
     @GetMapping("/listAnimals")
     public ArrayList<AnimalDto> getAnimals()
     {
-        System.out.println(animalsList.toString());
+
         return this.animalsList;
     }
 }
