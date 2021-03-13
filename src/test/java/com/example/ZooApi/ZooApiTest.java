@@ -1,6 +1,5 @@
 package com.example.ZooApi;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class ZooApiTest {
 
     @Test
     public void addAnimalTest() throws Exception {
-        Animal a1 = new Animal("Dog","walking");
+        AnimalDto a1 = new AnimalDto("Dog","walking");
         Zoo z1 = new Zoo();
         //z1.addAnimal(a1);
         mockMvc.perform(post("/animal")
@@ -38,8 +37,8 @@ public class ZooApiTest {
     public void getAnimalsTest() throws Exception {
 
         //setup
-        Animal a1 = new Animal("Dog","walking");
-        Animal a2 = new Animal("Bird","flying");
+        AnimalDto a1 = new AnimalDto("Dog","walking");
+        AnimalDto a2 = new AnimalDto("Bird","flying");
         Zoo z1 = new Zoo();
         //z1.addAnimal(a1);
         mockMvc.perform(post("/animal")
@@ -52,7 +51,8 @@ public class ZooApiTest {
         ).andExpect(status().isCreated());
         mockMvc.perform(get("/listAnimals"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(2));
+                .andExpect(jsonPath("length()").value(2))
+                .andExpect(jsonPath("[0].name").value("Dog"));
 
 
 

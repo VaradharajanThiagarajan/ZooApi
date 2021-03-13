@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class Animal {
+public class AnimalDto {
 
     String name;
     String animalType;
 
-    public Animal(String name, String type) {
+    public AnimalDto(String name, String type) {
         this.name = name;
         this.animalType = type;
     }
